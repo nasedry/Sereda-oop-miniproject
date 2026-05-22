@@ -1,18 +1,22 @@
-// Файл: CarRental.Domain/PassengerCar.cs
 namespace CarRental.Domain
 {
     public class PassengerCar : Vehicle
     {
-        public int PassengerCapacity { get; private set; }
+        // Перевір, щоб було саме так:
+        public int SeatingCapacity { get; private set; }
 
-        public PassengerCar(Guid id, string brand, string licensePlate, decimal basePricePerDay, int passengerCapacity)
+        public PassengerCar(Guid id, string brand, string licensePlate, decimal basePricePerDay, int seatingCapacity)
             : base(id, brand, licensePlate, basePricePerDay)
         {
-            if (passengerCapacity <= 0) throw new ArgumentException("Місткість пасажирів має бути більшою за 0.");
-            PassengerCapacity = passengerCapacity;
+            if (seatingCapacity <= 0) 
+                throw new ArgumentException("Місткість сидінь має бути більшою за нуль.");
+                
+            SeatingCapacity = seatingCapacity;
         }
 
-        // Легкові авто мають фіксовану ціну
-        public override decimal CalculateActualRentCost(int days) => BasePricePerDay * days;
+        public override decimal CalculateActualRentCost(int days)
+        {
+            return BasePricePerDay * days;
+        }
     }
 }

@@ -1,13 +1,14 @@
-// Файл: CarRental.Application/IRentalRepository.cs
 using System.Collections.Generic;
-using CarRental.Domain;
 
-namespace CarRental.Application
+namespace CarRental.Domain
 {
     public interface IRentalRepository
     {
-        void AddVehicle(Vehicle vehicle);
         IEnumerable<Vehicle> GetAllVehicles();
+        void AddVehicle(Vehicle vehicle);
         void AddOrder(RentalOrder order);
+        
+        // ДОДАЙ ЦЕЙ РЯДОК:
+        IEnumerable<RentalOrder> GetAllOrders();
     }
 }

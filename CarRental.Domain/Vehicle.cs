@@ -29,5 +29,6 @@ namespace CarRental.Domain
 
         public void MarkAsRented() => IsAvailable = false;
         public void MarkAsAvailable() => IsAvailable = true;
+        public void Release() => IsAvailable = true;
     }
 }

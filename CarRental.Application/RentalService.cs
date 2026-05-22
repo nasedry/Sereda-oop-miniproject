@@ -1,27 +1,21 @@
 // Файл: CarRental.Application/RentalService.cs
+using System;
+using System.Collections.Generic;
 using CarRental.Domain;
 
 namespace CarRental.Application
 {
     public class RentalService
     {
-        private readonly IVehicleRepository _vehicleRepository;
+        private readonly IRentalRepository _repo;
+        public RentalService(IRentalRepository repo) => _repo = repo;
 
-        public RentalService(IVehicleRepository vehicleRepository)
+        public Vehicle RegisterNewPassengerCar(string brand, string plate, decimal price, int capacity)
         {
-            _vehicleRepository = vehicleRepository;
-        }
-
-        public Vehicle RegisterNewVehicle(string brand, string licensePlate, decimal price)
-        {
-            var vehicle = new Vehicle(Guid.NewGuid(), brand, licensePlate, price);
-            _vehicleRepository.Add(vehicle);
-            return vehicle;
-        }
-
-        public IEnumerable<Vehicle> GetAvailableCars()
-        {
-            return _vehicleRepository.GetAll();
+            // ЗАМЕНЕНО: вместо абстрактного Vehicle вызываем конкретный PassengerCar
+            var car = new PassengerCar(Guid.NewGuid(), brand, plate, price, capacity);
+            _repo.AddVehicle(car);
+            return car;
         }
     }
 }
